@@ -1,0 +1,13 @@
+# Build artifacts
+*.o
+sojourn_buddy
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*~
+
+# OS-specific stuff
+.DS_Store
+Thumbs.db
