@@ -9,60 +9,84 @@
 #include "../include/settings.h"
 #include "../include/utils.h"
 
+#define MENU_WIDTH 60
+
+void display_menu(void) {
+	clear_screen();
+
+	print_line('=', MENU_WIDTH);
+	print_centered("Sojourn Buddy: Your Solo TTRPG Assistant", MENU_WIDTH);
+	print_line('=', MENU_WIDTH);
+	printf("\n");
+
+	const char* menu_items[] = {
+		"1. Dice Bag",
+		"2. Deck o' Cards",
+		"3. Journal",
+		"4. Map Maker",
+		"5. Settings", 
+		"6. Exit"
+	};
+
+	for (int i = 0; i < 6; i++) {
+		printf(" %s\n", menu_items[i]);
+	}
+
+	printf("\n");
+	print_line('-', MENU_WIDTH);
+	printf("\n");
+}
+
 int main(void) {
-	char choice[10];
 	bool running = true;
 
 	while (running) {
-		clear_screen();
+		display_menu();
 
-		printf("Sojourn Buddy: Your Solo Journaling RPG Toolbox!\n");
-		printf("||============================================||\n\n");
-		printf("1. Dice Bag\n");
-		printf("2. Card Deck\n");
-		printf("3. Journal\n");
-		printf("4. Map Maker\n");
-		printf("5. Settings\n");
-		printf("6. Exit\n\n");
-		printf("Enter your choice (1-6): ");
+		int choice = get_integer_input("Enter your choice (1 - 6): ", 1, 6);
 
-		get_input(choice, sizeof(choice));
-
-		switch (atoi(choice)) {
+		switch (choice) {
 			case 1:
-				printf("Roll some dice - Coming soon!\n");
-				printf("Press Enter to return.");
-				get_input(choice, sizeof(choice));
+				clear_screen();
+				print_centered("Dice Bag", MENU_WIDTH);
+				print_line('-', MENU_WIDTH);
+				printf("\nCOMING SOON!");
+				get_string_input(NULL, 0, "Press enter to return...");
 				break;
 			case 2:
-				printf("Draw some cards - Coming soon!\n");
-				printf("Press Enter to return.");
-				get_input(choice, sizeof(choice));
+				clear_screen();
+				print_centered("Deck o' Cards", MENU_WIDTH);
+				print_line('-', MENU_WIDTH);
+				printf("\nCOMING SOON!");
+				get_string_input(NULL, 0, "Press enter to return...");
 				break;
 			case 3:
-				printf("Write some words - Coming soon!\n");
-				printf("Press Enter to return.");
-				get_input(choice, sizeof(choice));
+				clear_screen();
+				print_centered("Journal", MENU_WIDTH);
+				print_line('-', MENU_WIDTH);
+				printf("\nCOMING SOON!");
+				get_string_input(NULL, 0, "Press enter to return...");
 				break;
 			case 4:
-				printf("Make a map - Coming soon!\n");
-				printf("Press Enter to return.");
-				get_input(choice, sizeof(choice));
+				clear_screen();
+				print_centered("Map Maker", MENU_WIDTH);
+				print_line('-', MENU_WIDTH);
+				printf("\nCOMING SOON!");
+				get_string_input(NULL, 0, "Press enter to return...");
 				break;
 			case 5:
-				printf("Settings - Coming soon!\n");
-				printf("Press Enter to return");
-				get_input(choice, sizeof(choice));
+				clear_screen();
+				print_centered("Settings", MENU_WIDTH);
+				print_line('-', MENU_WIDTH);
+				printf("\nCOMING SOON!");
+				get_string_input(NULL, 0, "Press enter to return...");
 				break;
 			case 6:
-				printf("Exiting Sohourn Buddy\n");
-				printf("Press Enter to return");
-				get_input(choice, sizeof(choice));
-				break;
-			default:
-				printf("Invalid choice.\n");
-				printf("Press Enter to return");
-				get_input(choice, sizeof(choice));
+				clear_screen();
+				print_centered("Exiting Sojourn Buddy", MENU_WIDTH);
+				print_line('-', MENU_WIDTH);
+				printf("\nFarewell, Traveler!\n\n");
+				running = false;
 				break;
 		}
 	}
