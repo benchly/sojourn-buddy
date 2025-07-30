@@ -33,19 +33,30 @@ void print_line(char c, int width) {
 	putchar('\n');
 }
 
-void get_string_input(char* buffer, size_t size, const char* prompt) {
+char* get_string_input(char* buffer, size_t size, const char* prompt) {
 	if (prompt != NULL) {
 		printf("%s", prompt);
+		fflush(stdout);
 	}
 
-	if (fgets(buffer, size, stdin) != NULL) {
-		size_t len = strlen(buffer);
-		if (len > 0 && buffer[len - 1] == '\n') {
-			buffer[len - 1] = '\0';
+	// if buffer is NULL, wait for Enter key
+	if (buffer == NULL || size == 0) {
+		while (getchar() != '\n') {
+			
 		}
-	} else {
-		buffer[0] = '\0';
+		return NULL;
 	}
+
+	if (fgets(buffer, size, stdin) == NULL) {
+		return NULL;
+	}
+	// Remove trailing new line, if present
+	size_t len = strlen(buffer);
+	if (len > 0 && buffer[len -1] == '\n') {
+		buffer[len - 1] = '\0';
+	}
+
+	return buffer;
 }
 
 int get_integer_input(const char* prompt, int min, int max) {

@@ -13,7 +13,7 @@ void print_centered(const char* text, int width);
 void print_line(char c, int width);
 
 // Gets string input from prompt
-void get_string_input(char* buffer, size_t size, const char* prompt);
+char* get_string_input(char* buffer, size_t size, const char* prompt);
 
 // Gets integer input from prompt
 int get_integer_input(const char* prompt, int min, int max);
