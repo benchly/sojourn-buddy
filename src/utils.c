@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include <sys/ioctl.h>
+#include <unistd.h>
 #include "../include/utils.h"
 
 void clear_screen(void) {
@@ -12,18 +14,37 @@ void clear_screen(void) {
 	#endif
 }
 
-void print_centered(const char* text, int width) {
-	int text_length = strlen(text);
-	int padding = (width - text_length) / 2;
+int get_terminal_width() {
+	struct winsize w;
+	ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
+	// Return actual width or default to 60 on failure
+	return (w.ws_col > 0) ? w.ws_col : 60;
+}
 
-	if (padding < 0) {
-		padding = 0;
-	}
+void print_centered(const char* str, int width) {
+	if (str == NULL) return;
 
+	// Calculate string length
+	int str_length = strlen(str);
+
+	// Calculate padding needed
+	int padding = (width - str_length) / 2;
+	if (padding < 0) padding = 0;
+
+	// Print string with padding
 	for (int i = 0; i < padding; i++) {
 		putchar(' ');
 	}
-	putchar('\n');
+
+	printf("%s", str);
+
+	// If odd length, offset to right
+	if ((width - str_length) % 2 != 0) padding++;
+
+	// Insert trailing padding if needed
+	for (int i = 0; i < padding; i++) {
+		putchar(' ');
+	}
 }
 
 void print_line(char c, int width) {

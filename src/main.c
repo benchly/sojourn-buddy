@@ -8,15 +8,20 @@
 #include "../include/map_editor.h"
 #include "../include/settings.h"
 #include "../include/utils.h"
+#include "../include/colors.h"
 
-#define MENU_WIDTH 60
+#define DEFAULT_WIDTH 60
+
+int get_terminal_width(); 
 
 void display_menu(void) {
 	clear_screen();
+	
+	int width = get_terminal_width();
 
-	print_line('=', MENU_WIDTH);
-	print_centered("Sojourn Buddy: Your Solo TTRPG Assistant", MENU_WIDTH);
-	print_line('=', MENU_WIDTH);
+	print_line('=', width);
+	print_centered("%sSojourn Buddy%s: Your Solo TTRPG Assistant", width);
+	print_line('=', width);
 	printf("\n");
 
 	const char* menu_items[] = {
@@ -29,17 +34,19 @@ void display_menu(void) {
 	};
 
 	for (int i = 0; i < 6; i++) {
-		printf(" %s\n", menu_items[i]);
+		printf(" %s%s%s\n", BYEL, menu_items[i], RESET);
 	}
 
 	printf("\n");
-	print_line('-', MENU_WIDTH);
+	print_line('-', width);
 	printf("\n");
 }
 
 int main(void) {
+	ENABLE_COLORS();
 	bool running = true;
-
+	int width = get_terminal_width();
+	
 	while (running) {
 		display_menu();
 
@@ -48,43 +55,43 @@ int main(void) {
 		switch (choice) {
 			case 1:
 				clear_screen();
-				print_centered("Dice Bag", MENU_WIDTH);
-				print_line('-', MENU_WIDTH);
+				print_centered("Dice Bag", width);
+				print_line('-', width);
 				printf("\nCOMING SOON!");
 				get_string_input(NULL, 0, "Press enter to return...");
 				break;
 			case 2:
 				clear_screen();
-				print_centered("Deck o' Cards", MENU_WIDTH);
-				print_line('-', MENU_WIDTH);
+				print_centered("Deck o' Cards", width);
+				print_line('-', width);
 				printf("\nCOMING SOON!");
 				get_string_input(NULL, 0, "Press enter to return...");
 				break;
 			case 3:
 				clear_screen();
-				print_centered("Journal", MENU_WIDTH);
-				print_line('-', MENU_WIDTH);
+				print_centered("Journal", width);
+				print_line('-', width);
 				printf("\nCOMING SOON!");
 				get_string_input(NULL, 0, "Press enter to return...");
 				break;
 			case 4:
 				clear_screen();
-				print_centered("Map Maker", MENU_WIDTH);
-				print_line('-', MENU_WIDTH);
+				print_centered("Map Maker", width);
+				print_line('-', width);
 				printf("\nCOMING SOON!");
 				get_string_input(NULL, 0, "Press enter to return...");
 				break;
 			case 5:
 				clear_screen();
-				print_centered("Settings", MENU_WIDTH);
-				print_line('-', MENU_WIDTH);
+				print_centered("Settings", width);
+				print_line('-', width);
 				printf("\nCOMING SOON!");
 				get_string_input(NULL, 0, "Press enter to return...");
 				break;
 			case 6:
 				clear_screen();
-				print_centered("Exiting Sojourn Buddy", MENU_WIDTH);
-				print_line('-', MENU_WIDTH);
+				print_centered("Exiting Sojourn Buddy", width);
+				print_line('-', width);
 				printf("\nFarewell, Traveler!\n\n");
 				running = false;
 				break;

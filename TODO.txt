@@ -1,0 +1,17 @@
+TO-DO: 
+
+_ Implement the following
+	_ Dice
+	_ Cards
+	_ Journal
+	_ Map
+	_ Settings
+
+_ Rework print_center and print_line functions or ditch
+  them. They don't play nice with the color format 
+  specifiers
+  	_ If this gets done, we can probably ditch the 
+  	  get_terminal_width function, which not really
+  	  adding a lot of value to the UX
+
+_ Maybe add a clock? Timer? Hmm. 
